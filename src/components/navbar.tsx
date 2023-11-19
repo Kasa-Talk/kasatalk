@@ -15,7 +15,7 @@ export default function Navbar() {
       <nav className="flex justify-between p-4 items-center max-w-6xl mx-auto">
         <div className="logo">
           <Link href={'/'}>
-            <Image src={'/logo.svg'} width={60} height={60} alt="Logo Kasa Talk" className="" />
+            <Image src={'/logo.svg'} width={60} height={43} alt="Logo Kasa Talk" className="" />
           </Link>
         </div>
         <div className="menu">

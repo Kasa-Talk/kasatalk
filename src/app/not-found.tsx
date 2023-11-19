@@ -8,9 +8,9 @@ export default function NotFound() {
       </div>
       <p className="mb-2">Maaf, Halaman tidak ditemukan</p>
       <div className='mt-5'>
-        <Link className="btn px-6 py-2" href={'/'}>
+        <a className="btn px-6 py-2" href={'/'}>
           Kembali Ke Beranda
-        </Link>
+        </a>
       </div>
     </div>
   );

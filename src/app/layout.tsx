@@ -4,8 +4,10 @@ import './globals.css';
 import Navbar from '@/components/navbar';
 import { AOSInit } from '@/utils/aos';
 import Footer from '@/components/footer';
+import { Suspense } from 'react';
+import Loading from './loading';
 
-const poppins = Poppins({ weight: ['400', '600', '800'], subsets: ['latin'] });
+const poppins = Poppins({ weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Kasa Talk',
@@ -17,9 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <AOSInit />
       <body className={poppins.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <Suspense fallback={<Loading />}>
+          <Navbar />
+          {children}
+          <Footer />
+        </Suspense>
       </body>
     </html>
   );
