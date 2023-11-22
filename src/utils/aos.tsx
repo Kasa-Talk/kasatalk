@@ -10,7 +10,6 @@ export const AOSInit = () => {
       easing: 'ease-out-quad',
       once: true,
     });
-
   }, []);
 
   return null;

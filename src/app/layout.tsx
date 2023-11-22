@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/navbar';
-import { AOSInit } from '@/utils/aos';
-import Footer from '@/components/footer';
 import { Suspense } from 'react';
 import Loading from './loading';
 
@@ -17,12 +14,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <AOSInit />
       <body className={poppins.className}>
         <Suspense fallback={<Loading />}>
-          <Navbar />
           {children}
-          <Footer />
         </Suspense>
       </body>
     </html>
