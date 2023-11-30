@@ -5,7 +5,7 @@ const Page = () => {
   return (
     <div className="grid grid-cols-2 h-screen gap-12">
       <div className="bg-primary flex justify-end">
-        <Image src={'/asset/batik-icon-vertikal.svg'} width={100} height={100} alt="batik-image" className="" />
+        <Image src={'/asset/batik-icon-vertikal.svg'} width={100} height={100} alt="batik-image"/>
       </div>
       <div className="my-auto">
         <h1 className="text-4xl pb-3 text-center font-bold leading-tight tracking-tight text-gray-900 dark:text-black">

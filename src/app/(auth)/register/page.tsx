@@ -1,9 +1,12 @@
 import Link from "next/link";
+import Image from 'next/image';
 
 const Page = () => {
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div></div>
+    <div className="grid grid-cols-2 h-screen gap-12">
+      <div className="bg-primary flex justify-end">
+        <Image src={'/asset/batik-icon-vertikal.svg'} width={100} height={100} alt="batik-image"/>
+      </div>
       <div className="my-auto">
         <h1 className="text-4xl pb-3 text-center font-bold leading-tight tracking-tight text-gray-900 dark:text-black">
           Buat Akun Anda
@@ -33,6 +36,14 @@ const Page = () => {
             <input type="password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 focus:outline-red-600 rounded-lg"
                   placeholder="password"/>
+          </div>
+          <div>
+            <label className="block mb-3 text-lg font-medium text-gray-900">
+              Confirm Password
+            </label>
+            <input type="password"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 focus:outline-red-600 rounded-lg"
+                  placeholder="confirm password"/>
           </div>
           <button 
             type="submit"
