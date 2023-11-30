@@ -20,24 +20,24 @@ export default function Navbar() {
         </div>
         <div className="menu">
           <ul
-            className={`flex md:gap-16 gap-9 md:p-0 md:static md:border-none md:mt-0 md:z-0 md:w-auto md:h-auto md:flex-row fixed bg-white flex-col border border-r-0 border-t-0 mt-[2.40rem] max-[500px]:w-full w-[50%] p-6 h-full right-0 md:transition-none transition-all ease-in-out ${
-              isOpen ? 'right-0 duration-300' : 'right-[-100%]'
+            className={`flex md:gap-16 gap-9 md:p-0 md:static md:border-none md:mt-0 md:z-0 md:w-auto md:h-auto md:flex-row fixed bg-white flex-col border border-r-0 border-t-0 mt-[2.40rem] max-[500px]:w-full w-[50%] p-6 h-full right-0 lg:transition-none transition-all ease-in-out  ${
+              isOpen ? 'right-0 duration-500' : 'right-[-100%] duration-500'
             }`}
           >
             {menu.map(({ label, link }) => (
-              <li key={label} className={`text-black text-base font-medium ${pathname === link ? 'text-primary' : ''}`}>
+              <li key={label} className={`text-black text-base font-medium ${pathname === link ? 'text-primary' : ''}`} onClick={() => setIsOpen(!isOpen)}>
                 <Link href={link} className="hover:text-primary">
                   {label}
                 </Link>
               </li>
             ))}
             <button className={`btn  py-2 md:hidden block`}>
-              <Link href={'/authentication/daftar'}>Masuk</Link>
+              <Link href={'/register'}>Masuk</Link>
             </button>
           </ul>
         </div>
         <button className={`btn px-8 py-2 md:block hidden`}>
-          <Link href={'/authentication/daftar'}>Masuk</Link>
+          <Link href={'/register'}>Masuk</Link>
         </button>
         <button className="block md:hidden text-2xl" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <RiCloseLine /> : <RiMenu3Line />}
