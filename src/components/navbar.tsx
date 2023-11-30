@@ -32,12 +32,12 @@ export default function Navbar() {
               </li>
             ))}
             <button className={`btn  py-2 md:hidden block`}>
-              <Link href={'/authentication/daftar'}>Masuk</Link>
+              <Link href={'/register'}>Masuk</Link>
             </button>
           </ul>
         </div>
         <button className={`btn px-8 py-2 md:block hidden`}>
-          <Link href={'/authentication/daftar'}>Masuk</Link>
+          <Link href={'/register'}>Masuk</Link>
         </button>
         <button className="block md:hidden text-2xl" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <RiCloseLine /> : <RiMenu3Line />}
