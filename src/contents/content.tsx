@@ -41,19 +41,19 @@ export const benefitUse = [
 export const faqs = [
   {
     question: 'Apakah Kasa Talk Gratis?',
-    answer: 'website kasa talk dapat anda gunakan secara gratis',
+    answer: 'Ya, website Kasa Talk dapat Anda gunakan secara gratis, tanpa biaya pendaftaran atau berlangganan',
   },
   {
     question: 'Apakah Ada Fitur Pengucapan Kata?',
-    answer: 'Ya, anda dapat menggunakan fitur pengucapan kata supaya mempermudah dalam mempelajari cara mengucapkanya',
+    answer: 'Ya, Kasa Talk memiliki fitur pengucapan kata yang dapat Anda gunakan untuk mempelajari cara mengucapkan kata-kata dengan benar.',
   },
   {
-    question: 'Bagaimana Cara Menambahkan Kata Baru?',
-    answer: 'Buat akun anda kemudian anda dapat berkontribusi untuk menambahkan kata baru',
+    question: 'Bagaimana Cara Menambahkan Kata Yang Belum Tersedia?',
+    answer: 'Untuk menambahkan kata baru ke Kasa Talk, Anda perlu membuat akun terlebih dahulu. Setelah itu, Anda dapat mengajukan kata yang belum tersedia melalui halaman kontribusi yang tersedia di website',
   },
   {
     question: 'Apakah Kamus Ini Menyediakan Contoh Penggunaan Kata dalam Kalimat?',
-    answer: 'Ya, kami menyediakan contoh penggunaan kata',
+    answer: 'Ya, Kasa Talk menyediakan contoh penggunaan kata dalam kalimat. Contoh-contoh ini dapat membantu Anda memahami cara menggunakan kata-kata dalam konteks yang berbeda',
   },
 ];
 
@@ -77,5 +77,63 @@ export const people = [
     name: 'Lindsay Walton',
     word: '200',
     imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  },
+];
+
+export const teams = [
+  {
+    name: 'Muh. Firdaus',
+    role: 'Backend Developer',
+    univesity: 'Universitas Mataram',
+    imageUrl: '/images/muh_firdaus.jpeg',
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/in/muh-firdaus-b3333a230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      github: 'https://github.com/muhfirdaus08',
+      instagram: 'https://www.instagram.com/muhfirdaus08',
+    },
+  },
+  {
+    name: 'Galuh Satria',
+    role: 'Frontend Developer',
+    univesity: 'Universitas Bumigora',
+    imageUrl: '/images/galuh_satria.jpeg',
+    socialMedia: {
+      linkedin: 'https://linkedin/in/galuh-satria-1002484210',
+      github: 'https://github.com/galuhsatria',
+      instagram: 'https://www.instagram.com/galuhsatria._/',
+    },
+  },
+  {
+    name: 'Naufal Azmi Wardhana',
+    role: 'Frontend Developer',
+    univesity: 'Universitas Mataram',
+    imageUrl: '/images/naufal_azmi_wardhana.jpeg',
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/in/naufal-azmi-wardhana-59b99922b/',
+      github: 'https://github.com/NaufalOpam',
+      instagram: 'https://www.instagram.com/naufalazmw/',
+    },
+  },
+  {
+    name: 'Dion Arifin',
+    role: 'Backend Developer',
+    univesity: 'Universitas Bumigora',
+    imageUrl: '/images/dion_arifin.jpeg',
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/in/dionarifin13012003/',
+      github: 'https://github.com/arifin1301',
+      instagram: 'https://www.instagram.com/arifindion__/',
+    },
+  },
+  {
+    name: 'Shafa Asyari Ramadhan',
+    role: 'Frontend Developer',
+    univesity: 'Universitas Mataram',
+    imageUrl: '/images/shafa_asyari_ramadhan.jpeg',
+    socialMedia: {
+      linkedin: 'https://www.linkedin.com/in/shafaasyari/',
+      github: 'https://github.com/shafaio',
+      instagram: 'https://www.instagram.com/shafaasyra_/',
+    },
   },
 ];
