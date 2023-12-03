@@ -31,7 +31,7 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            <button className={`btn  py-2 md:hidden block`}>
+            <button className={`btn py-2 md:hidden block`}>
               <Link href={'/register'}>Masuk</Link>
             </button>
           </ul>
