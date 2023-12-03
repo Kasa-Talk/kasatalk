@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 export default function Page() {
   return (
@@ -9,37 +9,43 @@ export default function Page() {
             <label className="block mb-3 text-lg font-medium text-gray-900">
               Nama
             </label>
-            <p className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg">
-              John Doe
-            </p>
+            <input
+              type="text"
+              // value={}
+              className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg"
+            />
           </div>
           <div>
             <label className="block mb-3 text-lg font-medium text-gray-900">
               Password Lama
             </label>
-            <p className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg">
-              ********
-            </p>
+            <input
+              type="password"
+              // value={}
+              className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg"
+            />
           </div>
           <div>
             <label className="block mb-3 text-lg font-medium text-gray-900">
               Password Baru
             </label>
-            <p className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg">
-              ********
-            </p>
+            <input
+              type="password"
+              // value={}
+              className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg"
+            />
           </div>
           <div>
             <label className="block mb-3 text-lg font-medium text-gray-900">
               Konfirmasi Password
             </label>
-            <p className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 rounded-lg">
-              ********
-            </p>
+            <input
+              type="password"
+              // value={}
+              className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg"
+            />
           </div>
-          <button 
-            type="submit"
-            className="w-full text-white bg-primary focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+          <button className="mt-6 btn w-full font-medium text-base px-5 py-2.5 ">
             Simpan Perubahan
           </button>
         </form>
