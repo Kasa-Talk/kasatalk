@@ -1,11 +1,15 @@
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
 
-export default function UserLayout({ children }: { children: React.ReactNode }) {
+export default function UserLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <section>
+    <section className="min-h-screen flex flex-col">
       <Navbar />
-      {children}
+      <div className="flex-1">{children}</div>
       <Footer />
     </section>
   );
