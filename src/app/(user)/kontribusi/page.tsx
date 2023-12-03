@@ -6,7 +6,7 @@ type EventHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
 export default function Page() {
   const [kataIndo, setKataIndo] = useState("");
   const [kataSasak, setKataSasak] = useState("");
-  // const [kataIndo, setKataIndo] = useState("");
+  const [penggunaanKata, setPenggunaanKata] = useState("");
 
   const onHandlerKataIndo: EventHandler = (event) => {
     setKataIndo(event.target.value);
@@ -14,6 +14,10 @@ export default function Page() {
 
   const onHandlerKataSasak: EventHandler = (event) => {
     setKataSasak(event.target.value);
+  };
+
+  const onHandlerPenggunaanKata: EventHandler = (event) => {
+    setPenggunaanKata(event.target.value);
   };
 
   return (
@@ -46,8 +50,8 @@ export default function Page() {
             className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
             type="text"
             placeholder="Wah Side Medaran?"
-            onChange={onHandlerKataSasak}
-            value={kataSasak}
+            onChange={onHandlerPenggunaanKata}
+            value={penggunaanKata}
           />
         </div>
         <button

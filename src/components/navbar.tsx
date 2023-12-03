@@ -25,7 +25,7 @@ export default function Navbar() {
             }`}
           >
             {menu.map(({ label, link }) => (
-              <li key={label} className={`text-black text-base font-medium ${pathname === link ? 'text-primary' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+              <li key={label} className={`text-black text-base font-medium ${pathname === link ? 'text-primary font-semibold' : ''}`} onClick={() => setIsOpen(!isOpen)}>
                 <Link href={link} className="hover:text-primary">
                   {label}
                 </Link>
