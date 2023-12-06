@@ -149,7 +149,9 @@ export default function Page() {
             required
             className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
             type="file"
+            accept=".mp3, .wav, .mpeg"
             onChange={onHandlerFile}
+            multiple={false}
           />
         </div>
         <button
