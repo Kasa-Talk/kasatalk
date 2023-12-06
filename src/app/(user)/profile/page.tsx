@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Page() {
   return (
     <div className="px-4">
       <div className="bg-white max-w-6xl mx-auto p-4 my-6 border rounded-lg">
+        <div className="rounded-full bg-gray-300 h-32 mx-auto place-content-center aspect-square overflow-hidden">
+          <Image src="/images/dummyImage.jpeg" width={130} height={200} alt="No Photo" />
+        </div>
         <form className="space-y-4 md:space-y-6">
           <div>
             <label className="block mb-3 text-lg font-medium text-gray-900">
