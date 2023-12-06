@@ -8,7 +8,7 @@ export default function Page() {
   const [kataSasak, setKataSasak] = useState<string>("");
   const [penggunaanKataIndo, setPenggunaanKataIndo] = useState<string>("");
   const [penggunaanKataSasak, setPenggunaanKataSasak] = useState<string>("");
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File | null>(null);
 
   const onHandlerKataIndo: EventHandler = (event) => {
     setKataIndo(event.target.value);
@@ -35,7 +35,10 @@ export default function Page() {
   const onSubmitKata = async (event: any) => {
     event.preventDefault();
     const formAudio = new FormData();
-    formAudio.append("audio", file);
+    
+    if (file != null) {
+      formAudio.append("audio", file);
+    }
 
     const body = {
       kataIndo,
@@ -43,7 +46,28 @@ export default function Page() {
       penggunaanKataIndo,
       penggunaanKataSasak,
     };
-    alert("test");
+
+    formAudio.append("data", JSON.stringify(body));
+
+    try {
+      const response = await fetch("endpoint", {
+        method: "POST",
+        body: formAudio,
+        headers: {
+          "Content-Type": "application/json",
+          // Tambahkan header lain jika diperlukan
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Upload successful:", data);
+      } else {
+        console.error("Upload failed:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error during upload:", error);
+    }
   };
 
   return (
@@ -107,7 +131,6 @@ export default function Page() {
             className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
             type="file"
             onChange={onHandlerFile}
-            value={file}
           />
         </div>
         <button
