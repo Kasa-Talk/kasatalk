@@ -3,7 +3,7 @@ import { config } from "dotenv";
 config();
 
 interface ProcessEnv {
-  BASE_URL?: string;
+  NEXT_PUBLIC_BASE_URL?: string;
 }
 
 declare const process: {
@@ -14,8 +14,7 @@ const getBaseURL = (
   endpoint?: string,
   query?: Record<string, string>
 ): string => {
-  let url = process.env.BASE_URL;
-
+  let url = process.env.NEXT_PUBLIC_BASE_URL;
   if (endpoint) {
     url += `${endpoint}`;
   }
@@ -25,7 +24,7 @@ const getBaseURL = (
     url += `?${queryString}`;
   }
 
-  return url || ""; 
+  return url || "";
 };
 
 export default getBaseURL;
