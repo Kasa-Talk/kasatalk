@@ -104,7 +104,7 @@ const Page: React.FC = () => {
               <input
                 required
                 onChange={handlerEmail}
-                type="text"
+                type="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 focus:outline-red-600 rounded-lg"
                 placeholder="jhonedoe@gmail.com"
               />
