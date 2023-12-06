@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import {  getCookie, deleteCookie } from 'cookies-next';
+import { getCookie, deleteCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -52,6 +52,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     deleteCookie('accessToken');
+    deleteCookie('refreshToken');
     router.push('/');
     window.location.reload();
   };
@@ -88,7 +89,7 @@ export default function Navbar() {
         <div className="flex gap-6">
           <div>
             {userData ? (
-              <div className='relative'>
+              <div className="relative">
                 <div className={`flex gap-4 items-center px-4 py-2 rounded-md hover:bg-[#F3F4F6] cursor-pointer ${openModal ? 'bg-[#F3F4F6]' : ''}`} onClick={() => setOpenModal(!openModal)}>
                   <img src={userData?.avatarUrl} alt={userData?.name} className="w-6" />
                   <p>{userData?.name}</p>
