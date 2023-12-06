@@ -3,11 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import axios from "axios";
 import getBaseURL from "@/libs/getBaseUrl";
 import { setCookie } from "cookies-next";
 import { ToastContainer, toast } from "react-toast";
 import ErrorMessage from "@/components/errorMessage";
+import { useRouter } from "next/navigation";
 
 interface LoginResponse {
   accessToken: string;
@@ -21,11 +21,11 @@ const Page: React.FC = () => {
   const [errorMessage, setErrorMesage] = useState<string>("");
   const [isLoad, setIsLoad] = useState<boolean>(false);
 
-  // const errorInfo = errorMessage ? <p>{errorMessage}</p> : null;
-  const errorInfo = errorMessage ? <ErrorMessage title={errorMessage}/> : null;
+  const router = useRouter();
 
-  console.log(getBaseURL('/login'));
-  
+  const errorInfo = errorMessage ? <ErrorMessage title={errorMessage} /> : null;
+
+  console.log(getBaseURL("/login"));
 
   const submitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -36,16 +36,13 @@ const Page: React.FC = () => {
 
     try {
       setIsLoad(true);
-      const response = await fetch(
-        getBaseURL('/login'),
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(getBaseURL("/login"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
       const {
         accessToken,
@@ -57,9 +54,9 @@ const Page: React.FC = () => {
       if (response.ok) {
         setCookie("accessToken", accessToken);
         setCookie("refreshToken", refreshToken);
-        alert("Login successful!");
+        router.push('/')
       } else {
-        setIsLoad(false)
+        setIsLoad(false);
         setErrorMesage(errors);
       }
     } catch (error) {
