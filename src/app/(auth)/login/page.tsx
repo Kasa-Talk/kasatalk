@@ -6,6 +6,8 @@ import { useState } from "react";
 import axios from "axios";
 import getBaseURL from "@/libs/getBaseUrl";
 import { setCookie } from "cookies-next";
+import { ToastContainer, toast } from "react-toast";
+import ErrorMessage from "@/components/errorMessage";
 
 interface LoginResponse {
   accessToken: string;
@@ -16,20 +18,26 @@ interface LoginResponse {
 const Page: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMesage] = useState<string>("");
+  const [isLoad, setIsLoad] = useState<boolean>(false);
+
+  // const errorInfo = errorMessage ? <p>{errorMessage}</p> : null;
+  const errorInfo = errorMessage ? <ErrorMessage title={errorMessage}/> : null;
+
+  console.log(getBaseURL('/login'));
+  
 
   const submitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const body = {
       email,
       password,
     };
 
-    console.log(body);
-
     try {
+      setIsLoad(true);
       const response = await fetch(
-        "https://kasa-talk-tpe6yyswta-as.a.run.app/api/login",
+        getBaseURL('/login'),
         {
           method: "POST",
           headers: {
@@ -42,17 +50,20 @@ const Page: React.FC = () => {
       const {
         accessToken,
         refreshToken,
-      }: { accessToken: string; refreshToken: string } = await response.json();
+        errors,
+      }: { accessToken: string; refreshToken: string; errors: string } =
+        await response.json();
 
       if (response.ok) {
         setCookie("accessToken", accessToken);
         setCookie("refreshToken", refreshToken);
         alert("Login successful!");
       } else {
-        alert("Login failed. Please check your credentials.");
+        setIsLoad(false)
+        setErrorMesage(errors);
       }
     } catch (error) {
-      console.log("Error during login:", error);
+      toast.error((error as Error).message);
     }
   };
 
@@ -66,6 +77,7 @@ const Page: React.FC = () => {
 
   return (
     <div className="grid md:grid-cols-2 h-screen">
+      <ToastContainer delay={5000} />
       <div className="bg-primary hidden md:flex justify-end">
         <Image
           src={"/asset/batik-icon-vertikal.svg"}
@@ -90,6 +102,7 @@ const Page: React.FC = () => {
                 Email
               </label>
               <input
+                required
                 onChange={handlerEmail}
                 type="text"
                 className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 focus:outline-red-600 rounded-lg"
@@ -101,26 +114,28 @@ const Page: React.FC = () => {
                 Password
               </label>
               <input
+                required
                 onChange={handlerPassword}
                 type="password"
                 className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 focus:outline-red-600 rounded-lg"
                 placeholder="password"
               />
             </div>
+            {errorInfo}
             <div>
-              <p className="md:text-lg text-black">
+              <p className="md:text-md text-black">
                 Lupa Password?{" "}
                 <Link
                   href="/register"
-                  className="font-medium text-primary-600 hover:underline text-primary">
+                  className="font-semibold text-primary-600 hover:underline text-primary">
                   Klik Di sini
                 </Link>
               </p>
             </div>
             <button
               type="submit"
-              className="btn w-full font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-              Masuk
+              className={`btn w-full font-medium rounded-lg text-sm px-5 py-2.5 text-center`}>
+              {isLoad ? <div className="custom-loader mx-auto"></div> : "Masuk"}
             </button>
           </form>
           <div>
