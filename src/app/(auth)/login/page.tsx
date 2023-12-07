@@ -25,8 +25,6 @@ const Page: React.FC = () => {
 
   const errorInfo = errorMessage ? <ErrorMessage title={errorMessage} /> : null;
 
-  console.log(getBaseURL("/login"));
-
   const submitLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const body = {
