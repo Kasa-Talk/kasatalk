@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ErrorMessage from '@/components/errorMessage';
+import { RiArrowLeftLine } from 'react-icons/ri';
 
 const Page = () => {
   const router = useRouter();
@@ -54,8 +55,6 @@ const Page = () => {
         } else if (data.errors.includes('password most be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol')) {
           setErrorMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 huruf dan 1 simbol');
         }
-      } else {
-        setErrorMessage('Maaf Terdapat Kesalahan');
       }
     } catch (error) {
       console.log(error);
@@ -69,9 +68,16 @@ const Page = () => {
       <div className="bg-primary hidden md:flex justify-end">
         <Image src={'/asset/batik-icon-vertikal.svg'} width={100} height={100} alt="batik-image" />
       </div>
-      <div className="my-auto px-4 mt-16 md:w-full max-w-2xl mx-auto">
-        <h1 className="text-3xl md:text-4xl pb-3 font-bold leading-tight tracking-tight text-gray-900 dark:text-black">Buat Akun Anda</h1>
-        <p className="text-base font-medium pb-6">Silahkan daftar untuk membuat akun</p>
+      <div className="my-auto px-4 md:w-full max-w-2xl mx-auto mt-4">
+        <div className="flex md:flex-row flex-col-reverse md:items-center justify-between">
+          <div>
+            <h1 className="text-3xl md:text-4xl pb-3 font-bold leading-tight tracking-tight text-gray-900 dark:text-black mt-6">Buat Akun Anda</h1>
+            <p className="text-base font-medium pb-6">Silahkan daftar untuk membuat akun</p>
+          </div>
+          <Link href={'/'}>
+            <Image src={'/logo.svg'} width={80} height={57} alt="batik-image" />
+          </Link>
+        </div>  
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div>
             <label className="block mb-2 text-lg font-medium text-gray-900">Nama</label>

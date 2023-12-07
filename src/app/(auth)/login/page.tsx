@@ -83,14 +83,17 @@ const Page: React.FC = () => {
           alt="batik-image"
         />
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center h-screen px-4">
         <div className="max-w-2xl px-4 w-full">
-          <h1 className="md:text-4xl text-3xl pb-3 font-bold leading-tight tracking-tight text-slate-800 dark:text-black">
-            Selamat Datang Kembali
-          </h1>
-          <p className="text-base font-medium pb-12">
-            Silahkan masuk ke akun anda
-          </p>
+          <div className="flex md:flex-row flex-col-reverse md:items-center justify-between">
+          <div>
+            <h1 className="text-3xl md:text-4xl pb-3 font-bold leading-tight tracking-tight text-gray-900 dark:text-black mt-6">Selamat Datang Kembali</h1>
+            <p className="text-base font-medium pb-6">Silahkan masuk ke akun anda</p>
+          </div>
+          <Link href={'/'}>
+            <Image src={'/logo.svg'} width={80} height={57} alt="batik-image" />
+          </Link>
+        </div>  
           <form
             className="space-y-4 md:space-y-6 w-full"
             onSubmit={submitLogin}>
