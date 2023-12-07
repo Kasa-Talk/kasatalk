@@ -53,8 +53,8 @@ export default function Navbar() {
   const handleLogout = () => {
     deleteCookie('accessToken');
     deleteCookie('refreshToken');
+    setUserData(null);
     router.push('/');
-    window.location.reload();
   };
 
   return (
