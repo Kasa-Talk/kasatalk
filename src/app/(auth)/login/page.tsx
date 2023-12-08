@@ -8,6 +8,7 @@ import { setCookie } from "cookies-next";
 import { ToastContainer, toast } from "react-toast";
 import ErrorMessage from "@/components/errorMessage";
 import { useRouter } from "next/navigation";
+import ForgotPassword from "@/components/forgotPassword";
 
 interface LoginResponse {
   accessToken: string;
@@ -132,14 +133,9 @@ const Page: React.FC = () => {
             </div>
             {errorInfo}
             <div>
-              <p className="md:text-md text-black">
-                Lupa Password?{" "}
-                <Link
-                  href="/register"
-                  className="font-semibold text-primary-600 hover:underline text-primary">
-                  Klik Di sini
-                </Link>
-              </p>
+              <div className="md:text-md text-black">
+                Lupa Password? <ForgotPassword />
+              </div>
             </div>
             <button
               type="submit"
@@ -149,7 +145,7 @@ const Page: React.FC = () => {
           </form>
           <div>
             <p className="text-center md:text-lg font-normal pt-7 text-black">
-              Tidak punya akun?{" "}
+              Belum punya akun?{" "}
               <Link
                 href="/register"
                 className="font-semibold text-primary-600 hover:underline text-primary">
