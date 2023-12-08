@@ -1,8 +1,9 @@
 "use client";
 
-import { hasCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { useState } from "react";
 import Image from "next/image";
+import getBaseURL from "@/libs/getBaseUrl";
 type EventHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
 export default function Page() {
@@ -37,39 +38,38 @@ export default function Page() {
   const onSubmitKata = async (event: any) => {
     event.preventDefault();
     const formAudio = new FormData();
-    
+
+    const body = {
+      indonesia: kataIndo,
+      sasak: kataSasak,
+      contohPenggunaanIndo: penggunaanKataIndo,
+      contohPenggunaanSasak: penggunaanKataSasak,
+      formAudio
+    };
+
     if (file != null) {
       formAudio.append("audio", file);
     }
 
-    const body = {
-      kataIndo,
-      kataSasak,
-      penggunaanKataIndo,
-      penggunaanKataSasak,
-    };
+    // try {
+    //   const response = await fetch(getBaseURL("/kata"), {
+    //     method: "POST",
+    //     body: formAudio,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${getCookie("accessToken")}`,
+    //     },
+    //   });
 
-    formAudio.append("data", JSON.stringify(body));
-
-    try {
-      const response = await fetch("endpoint", {
-        method: "POST",
-        body: formAudio,
-        headers: {
-          "Content-Type": "application/json",
-          // Tambahkan header lain jika diperlukan
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Upload successful:", data);
-      } else {
-        console.error("Upload failed:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error during upload:", error);
-    }
+    //   if (response.ok) {
+    //     const data = await response.json();
+    //     console.log("Upload successful:", data);
+    //   } else {
+    //     console.error("Upload failed:", response.statusText);
+    //   }
+    // } catch (error) {
+    //   console.error("Error during upload:", error);
+    // }
   };
 
   const cookie = hasCookie("accessToken");
@@ -77,21 +77,31 @@ export default function Page() {
     return (
       <div className="px-4">
         <div className="bg-white max-w-6xl mx-auto p-4 my-6 border rounded-lg text-center">
-          <Image src = "/asset/please-login.png" width={500} height={500} alt="" className="mt-5 mx-auto"/>
+          <Image
+            src="/asset/please-login.png"
+            width={500}
+            height={500}
+            alt=""
+            className="mt-5 mx-auto"
+          />
           <h1 className="mt-5 mb-3 text-3xl font-semibold text-gray-900">
             Login dulu yah
           </h1>
           <p className="mt-5 mb-5">
-            Silahkan login atau membuat akun terlebih dahulu untuk dapat memulai berkontribusi
+            Silahkan login atau membuat akun terlebih dahulu untuk dapat memulai
+            berkontribusi
           </p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <form className="max-w-2xl mx-auto space-y-6" onSubmit={onSubmitKata}>
+      <form
+        className="max-w-2xl mx-auto space-y-6"
+        onSubmit={onSubmitKata}
+        encType="multipart/form-data">
         <h1 className="text-primary text-2xl font-semibold">
           Silakan Tambah Kosa Kata Bahasa Sasak
         </h1>
