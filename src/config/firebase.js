@@ -1,5 +1,8 @@
-const admin = require('firebase-admin');
-require('dotenv').config();
+import admin from "firebase-admin";
+import { config } from "dotenv";
+config();
+
+console.log(process.env.type);
 
 const serviceAccount = {
   type: process.env.type,
@@ -17,7 +20,7 @@ const serviceAccount = {
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: 'gs://kasa-talk-storage.appspot.com',
+  storageBucket: "gs://kasa-talk-storage.appspot.com",
 });
 
 module.exports = admin;
