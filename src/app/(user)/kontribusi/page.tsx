@@ -12,6 +12,7 @@ export default function Page() {
   const [penggunaanKataIndo, setPenggunaanKataIndo] = useState<string>("");
   const [penggunaanKataSasak, setPenggunaanKataSasak] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
+  const [fileURL, setFileURL] = useState<string>("");
 
   const onHandlerKataIndo: EventHandler = (event) => {
     setKataIndo(event.target.value);
@@ -37,24 +38,21 @@ export default function Page() {
 
   const onSubmitKata = async (event: any) => {
     event.preventDefault();
-    const formAudio = new FormData();
 
     const body = {
       indonesia: kataIndo,
       sasak: kataSasak,
       contohPenggunaanIndo: penggunaanKataIndo,
       contohPenggunaanSasak: penggunaanKataSasak,
-      formAudio
+      audio: file?.name,
     };
 
-    if (file != null) {
-      formAudio.append("audio", file);
-    }
+    console.log(body);
 
     // try {
     //   const response = await fetch(getBaseURL("/kata"), {
     //     method: "POST",
-    //     body: formAudio,
+    //     body: body,
     //     headers: {
     //       "Content-Type": "application/json",
     //       Authorization: `Bearer ${getCookie("accessToken")}`,
@@ -98,18 +96,18 @@ export default function Page() {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
+      <h1 className="text-primary text-2xl font-semibold text-center">
+        Silakan Tambah Kosa Kata Bahasa Sasak
+      </h1>
       <form
-        className="max-w-2xl mx-auto space-y-6"
+        className="max-w-2xl mx-auto space-y-6 my-8"
         onSubmit={onSubmitKata}
         encType="multipart/form-data">
-        <h1 className="text-primary text-2xl font-semibold">
-          Silakan Tambah Kosa Kata Bahasa Sasak
-        </h1>
         <div className="space-y-3">
-          <h2 className="text-md">Bahasa Indonesia</h2>
+          <label className="text-md">Bahasa Indonesia</label>
           <input
             required
-            className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
+            className="rounded-md text-lg px-4 h-10 w-full border focus:outline-primary"
             type="text"
             placeholder="Makan"
             onChange={onHandlerKataIndo}
@@ -117,10 +115,10 @@ export default function Page() {
           />
         </div>
         <div className="space-y-3">
-          <h2 className="text-md">Bahasa Sasak</h2>
+          <label className="text-md">Bahasa Sasak</label>
           <input
             required
-            className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
+            className="rounded-md text-lg px-4 h-10 w-full border focus:outline-primary"
             type="text"
             placeholder="Medaran"
             onChange={onHandlerKataSasak}
@@ -128,12 +126,12 @@ export default function Page() {
           />
         </div>
         <div className="space-y-3">
-          <h2 className="text-md">
+          <label className="text-md">
             Contoh Penggunaan Kata Dalama Bahasa Indonesia
-          </h2>
+          </label>
           <input
             required
-            className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
+            className="rounded-md text-lg px-4 h-10 w-full border focus:outline-primary"
             type="text"
             placeholder="Kamu Sudah Makan?"
             onChange={onHandlerPenggunaanKataIndo}
@@ -141,12 +139,12 @@ export default function Page() {
           />
         </div>
         <div className="space-y-3">
-          <h2 className="text-md">
+          <label className="text-md">
             Contoh Penggunaan Kata Dalama Bahasa Sasak
-          </h2>
+          </label>
           <input
             required
-            className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
+            className="rounded-md text-lg px-4 h-10 w-full border focus:outline-primary"
             type="text"
             placeholder="Wah Side Medaran?"
             onChange={onHandlerPenggunaanKataSasak}
@@ -154,15 +152,15 @@ export default function Page() {
           />
         </div>
         <div className="space-y-3">
-          <h2 className="text-md">Masukan Suara Kata</h2>
+          <label className="text-md">Unggah Suara Kata</label>
           <input
             required
-            className="rounded-md text-lg px-4 h-10 w-full border-2 focus:outline-primary"
             type="file"
             accept=".mp3, .wav, .mpeg"
+            className="block w-full text-sm file:mr-4 file:rounded-s-md border rounded-md file:border-0 file:bg-primary file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white focus:outline-none file:cursor-pointer"
             onChange={onHandlerFile}
-            multiple={false}
           />
+          <p className="text-sm text-gray-400">.mp3 (Max 1 mb)</p>
         </div>
         <button
           type="submit"

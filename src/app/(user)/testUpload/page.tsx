@@ -5,7 +5,7 @@ import { analytics } from "@/app/firebase/firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const Page = () => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
 
   const submit = async (event: any) => {
     event.preventDefault();
