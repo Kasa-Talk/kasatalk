@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import { withUt } from "uploadthing/tw";
 
 const baseConfig: Config = {
   content: [
@@ -20,6 +19,4 @@ const baseConfig: Config = {
   },
 };
 
-const extendedConfig = withUt(baseConfig);
-
-export default extendedConfig;
+export default baseConfig;
