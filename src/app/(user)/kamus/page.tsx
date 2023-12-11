@@ -20,7 +20,6 @@ export default function Page() {
   const [ilustration, setIlustration] = useState(true);
   const [isIndonesia, setIsIndonesia] = useState(false);
 
-  console.log(words);
   const handleSearch = async () => {
     if (!searchValue) return;
     setIlustration(false);

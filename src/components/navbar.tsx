@@ -18,15 +18,15 @@ export default function Navbar() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const token = getCookie('accessToken');
-
-        console.log(token);
 
         const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/users', {
           method: 'GET',
@@ -44,6 +44,8 @@ export default function Navbar() {
         setUserData(fetchedData.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -87,29 +89,41 @@ export default function Navbar() {
         </div>
 
         <div className="flex gap-6">
-          <div>
-            {userData ? (
-              <div className="relative">
-                <div className={`flex gap-4 items-center px-4 py-2 rounded-md hover:bg-[#F3F4F6] cursor-pointer ${openModal ? 'bg-[#F3F4F6]' : ''}`} onClick={() => setOpenModal(!openModal)}>
-                  <img src={userData?.avatarUrl} alt={userData?.name} className="w-6" />
-                  <p>{userData?.name}</p>
+          {isLoading ? (
+            <div>
+              <div className="px-8 py-5 w-[7.5rem]"></div>
+            </div>
+          ) : (
+            <div>
+              {userData ? (
+                <div className="relative">
+                  <div className={`flex gap-4 items-center px-4 py-2 rounded-md hover:bg-[#F3F4F6] cursor-pointer ${openModal ? 'bg-[#F3F4F6]' : ''}`} onClick={() => setOpenModal(!openModal)}>
+                    <img src={userData?.avatarUrl} alt={userData?.name} className="w-6" />
+                    <p>{userData?.name}</p>
+                  </div>
+                  <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1.10rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
+                    <ul className="flex flex-col gap-2">
+                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">Dashboard</li>
+                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">
+                        <Link href={'/profile'} onClick={() => setOpenModal(!openModal)}>
+                          Profile
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md text-primary" onClick={handleLogout}>
+                        Keluar
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1.10rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
-                  <ul className="flex flex-col gap-2">
-                    <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">Dashboard</li>
-                    <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">Profile</li>
-                    <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md text-primary" onClick={handleLogout}>
-                      Keluar
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            ) : (
-              <button className={`btn px-8 py-2 md:block hidden`} onClick={() => setIsOpen(!isOpen)}>
-                <Link href={'/login'}>Masuk</Link>
-              </button>
-            )}
-          </div>
+              ) : (
+                <Link href={'/login'}>
+                  <button className={`btn px-8 py-2 md:block hidden`} onClick={() => setIsOpen(!isOpen)}>
+                    Masuk
+                  </button>
+                </Link>
+              )}
+            </div>
+          )}
           <button className="block md:hidden text-2xl" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <RiCloseLine /> : <RiMenu3Line />}
           </button>
