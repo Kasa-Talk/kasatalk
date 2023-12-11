@@ -9,6 +9,7 @@ import Loading from '@/app/loading';
 import { ErrorMessage, SuccessMessage } from '@/components/message';
 import { analytics } from '@/app/firebase/firebase-config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 interface UserData {
   name: string;
@@ -40,8 +41,11 @@ export default function Page() {
 
     setUploadAvatarLoading(true);
 
+    const idAvatar = uuidv4();
+
+    const avatarName = `${idAvatar}-${file?.name}`
     if (file) {
-      const fileRef = ref(analytics, `kasa-talk-avatar/${file.name}`);
+      const fileRef = ref(analytics, `kasa-talk-avatar/${avatarName}`);
       uploadBytes(fileRef, file).then((data) => {
         getDownloadURL(data.ref).then((url) => {
           console.log('url', url);
