@@ -4,8 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ErrorMessage from '@/components/errorMessage';
-import { RiArrowLeftLine } from 'react-icons/ri';
+import { ErrorMessage } from '@/components/message';
 
 const Page = () => {
   const router = useRouter();
@@ -43,7 +42,6 @@ const Page = () => {
       }
 
       const data = await res.json();
-      console.log(data);
 
       if (data.errors) {
         if (data.errors.includes('Account already registered, please check your email to activate your account')) {
@@ -77,7 +75,7 @@ const Page = () => {
           <Link href={'/'}>
             <Image src={'/logo.svg'} width={80} height={57} alt="batik-image" />
           </Link>
-        </div>  
+        </div>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div>
             <label className="block mb-2 text-lg font-medium text-gray-900">Nama</label>
