@@ -49,38 +49,23 @@ export default function Page() {
   const handleEdit = async (e: any) => {
     e.preventDefault();
 
-    let requestBody = {};
-
-    if (name !== userData?.name) {
-      requestBody = { name };
-    }
-
-    if (avatarUrl) {
-      requestBody = { avatarUrl };
-    }
-
-    if (password && confirmPassword) {
-      requestBody = { password, confirmPassword };
-    }
-
-    if (name !== userData?.name && avatarUrl && password && confirmPassword) {
-      requestBody = { name, avatarUrl, password, confirmPassword };
-    }
-
     const idAvatar = uuidv4();
-
     const avatarName = `${idAvatar}-${file?.name}`;
+    let avatarDownloadUrl = avatarUrl;
+
     if (file) {
       const fileRef = ref(analytics, `kasa-talk-avatar/${avatarName}`);
-      uploadBytes(fileRef, file).then((data) => {
-        getDownloadURL(data.ref).then((url) => {
-          console.log('url', url);
-          setAvatarUrl(url);
-        });
-      });
-    } else {
-      alert('belum ada file');
+      await uploadBytes(fileRef, file);
+      const downloadURL = await getDownloadURL(fileRef);
+      avatarDownloadUrl = downloadURL;
     }
+
+    const requestBody = {
+      name: name !== userData?.name ? name : undefined,
+      avatarUrl: avatarDownloadUrl !== userData?.avatarUrl ? avatarDownloadUrl : undefined,
+      password: password ? password : undefined,
+      confirmPassword: confirmPassword ? confirmPassword : undefined,
+    };
 
     try {
       setBtnEditLoad(true);
@@ -103,6 +88,8 @@ export default function Page() {
           window.location.reload();
         }, 1000);
       }
+
+      console.log(data.errors);
 
       if (data.errors) {
         if (data.errors.includes('Password not match')) {
