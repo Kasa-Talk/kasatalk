@@ -22,10 +22,9 @@ export default function Page() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [uploadAvatarLoading, setUploadAvatarLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  const [avatar, setAvatar] = useState<string | undefined>('');
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>('');
 
   const [name, setName] = useState<string | undefined>('');
   const [password, setPassword] = useState('');
@@ -35,58 +34,14 @@ export default function Page() {
 
   const [file, setFile] = useState<File | null>(null);
 
-  const headleUploadAvatar = async (event: any) => {
-    event.preventDefault();
-    console.log(file);
-
-    setUploadAvatarLoading(true);
-
-    const idAvatar = uuidv4();
-
-    const avatarName = `${idAvatar}-${file?.name}`
-    if (file) {
-      const fileRef = ref(analytics, `kasa-talk-avatar/${avatarName}`);
-      uploadBytes(fileRef, file).then((data) => {
-        getDownloadURL(data.ref).then((url) => {
-          console.log('url', url);
-          setAvatar(url);
-        });
-      });
-    } else {
-      alert('belum ada file');
-    }
-
-    try {
-      const token = getCookie('accessToken');
-      const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/users/avatar', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ avatar }),
-      });
-
-      if (res.ok) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setUploadAvatarLoading(false);
-    }
-  };
-
   const handleFileSelect = (event: any) => {
     const file = event.target.files[0];
     if (file) {
-      setFile(file); // Set the selected file
+      setFile(file);
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        setAvatar(reader.result as string); // Update the avatar state with the selected file URL
+        setAvatarUrl(reader.result as string);
       };
     }
   };
@@ -94,19 +49,23 @@ export default function Page() {
   const handleEdit = async (e: any) => {
     e.preventDefault();
 
-    let requestBody = {};
+    const idAvatar = uuidv4();
+    const avatarName = `${idAvatar}-${file?.name}`;
+    let avatarDownloadUrl = avatarUrl;
 
-    if (name !== userData?.name) {
-      requestBody = { name };
+    if (file) {
+      const fileRef = ref(analytics, `kasa-talk-avatar/${avatarName}`);
+      await uploadBytes(fileRef, file);
+      const downloadURL = await getDownloadURL(fileRef);
+      avatarDownloadUrl = downloadURL;
     }
 
-    if (password && confirmPassword) {
-      requestBody = { password, confirmPassword };
-    }
-
-    if (name !== userData?.name && password && confirmPassword) {
-      requestBody = { name, password, confirmPassword };
-    }
+    const requestBody = {
+      name: name !== userData?.name ? name : undefined,
+      avatarUrl: avatarDownloadUrl !== userData?.avatarUrl ? avatarDownloadUrl : undefined,
+      password: password ? password : undefined,
+      confirmPassword: confirmPassword ? confirmPassword : undefined,
+    };
 
     try {
       setBtnEditLoad(true);
@@ -129,6 +88,8 @@ export default function Page() {
           window.location.reload();
         }, 1000);
       }
+
+      console.log(data.errors);
 
       if (data.errors) {
         if (data.errors.includes('Password not match')) {
@@ -166,7 +127,7 @@ export default function Page() {
         const dataUser = await response.json();
         setUserData(dataUser.data);
         setName(dataUser.data.name);
-        setAvatar(dataUser.data.avatarUrl);
+        setAvatarUrl(dataUser.data.avatarUrl);
       } catch (error) {
         console.log(error);
       } finally {
@@ -185,7 +146,7 @@ export default function Page() {
         <div className="bg-white max-w-6xl mx-auto p-4 my-6 border rounded-lg">
           <div className="max-w-4xl mx-auto px-4">
             <div className="rounded-full bg-gray-300 h-32 mx-auto place-content-center aspect-square overflow-hidden mt-10">
-              <img src={avatar} width={130} height={200} alt="No Photo" className="object-cover h-32" />
+              <img src={avatarUrl} width={130} height={200} alt="No Photo" className="object-cover h-32" />
             </div>
 
             <div className="flex gap-3 justify-center mt-6">
@@ -193,11 +154,6 @@ export default function Page() {
                 <p className="bg-none w-max px-4 py-2 rounded-full border-primary border text-center cursor-pointer">Ganti Foto</p>
                 <input id="upload-avatar" type="file" accept="image/*" className="hidden" onChange={(event: any) => handleFileSelect(event)} />
               </label>
-              {file && (
-                <button className="btn px-4 py-2" onClick={headleUploadAvatar}>
-                  {uploadAvatarLoading ? <div className="custom-loader mx-auto"></div> : 'Simpan'}
-                </button>
-              )}
             </div>
           </div>
           <form className="space-y-4 md:space-y-6 max-w-4xl mx-auto my-10">

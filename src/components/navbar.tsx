@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { getCookie, deleteCookie } from 'cookies-next';
+import { getCookie, deleteCookie, hasCookie } from 'cookies-next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -23,30 +23,34 @@ export default function Navbar() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
+    const token = getCookie('accessToken');
+
+    setIsLoading(true);
     const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const token = getCookie('accessToken');
+      if (token) {
+        try {
+          const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/users', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'appliscation/json',
+            },
+          });
 
-        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/users', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+          const fetchedData = await response.json();
+          setUserData(fetchedData.data);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setIsLoading(false);
         }
-
-        const fetchedData = await response.json();
-        setUserData(fetchedData.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
       }
+
+      setIsLoading(false);
     };
 
     fetchData();
@@ -90,23 +94,27 @@ export default function Navbar() {
 
         <div className="flex gap-6">
           {isLoading ? (
-            <div>
-              <div className="px-8 py-5 w-[7.5rem]"></div>
+            <div className="animate-pulse">
+              <div className="px-8 py-5 w-[7.5rem] md:bg-[#F3F4F6] rounded-full"></div>
             </div>
           ) : (
             <div>
               {userData ? (
                 <div className="relative">
                   <div className={`flex gap-4 items-center px-4 py-2 rounded-md hover:bg-[#F3F4F6] cursor-pointer ${openModal ? 'bg-[#F3F4F6]' : ''}`} onClick={() => setOpenModal(!openModal)}>
-                    <img src={userData?.avatarUrl} alt={userData?.name} className="w-6" />
+                    <img src={userData?.avatarUrl} alt={userData?.name} className="w-8 h-8 object-cover rounded-full" />
                     <p>{userData?.name}</p>
                   </div>
-                  <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1.10rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
+                  <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
                     <ul className="flex flex-col gap-2">
-                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">Dashboard</li>
                       <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">
                         <Link href={'/profile'} onClick={() => setOpenModal(!openModal)}>
                           Profile
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">
+                        <Link href={'/edit-profile'} onClick={() => setOpenModal(!openModal)}>
+                          Edit Profile
                         </Link>
                       </li>
                       <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md text-primary" onClick={handleLogout}>
