@@ -49,6 +49,8 @@ export default function Navbar() {
           setIsLoading(false);
         }
       }
+
+      setIsLoading(false);
     };
 
     fetchData();
@@ -93,7 +95,7 @@ export default function Navbar() {
         <div className="flex gap-6">
           {isLoading ? (
             <div className="animate-pulse">
-              <div className="px-8 py-5 w-[7.5rem] bg-[#F3F4F6] rounded-full"></div>
+              <div className="px-8 py-5 w-[7.5rem] md:bg-[#F3F4F6] rounded-full"></div>
             </div>
           ) : (
             <div>
@@ -103,12 +105,16 @@ export default function Navbar() {
                     <img src={userData?.avatarUrl} alt={userData?.name} className="w-8 h-8 object-cover rounded-full" />
                     <p>{userData?.name}</p>
                   </div>
-                  <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1.10rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
+                  <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
                     <ul className="flex flex-col gap-2">
-                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">Dashboard</li>
                       <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">
                         <Link href={'/profile'} onClick={() => setOpenModal(!openModal)}>
                           Profile
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">
+                        <Link href={'/edit-profile'} onClick={() => setOpenModal(!openModal)}>
+                          Edit Profile
                         </Link>
                       </li>
                       <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md text-primary" onClick={handleLogout}>
