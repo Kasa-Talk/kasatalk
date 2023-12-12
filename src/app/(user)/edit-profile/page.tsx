@@ -22,7 +22,6 @@ export default function Page() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   const [isLoading, setIsLoading] = useState(true);
-  // const [uploadAvatarLoading, setUploadAvatarLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>('');
@@ -34,50 +33,6 @@ export default function Page() {
   const [btnEditLoad, setBtnEditLoad] = useState(false);
 
   const [file, setFile] = useState<File | null>(null);
-
-  // const headleUploadAvatar = async (event: any) => {
-  //   event.preventDefault();
-  //   console.log(file);
-
-  //   setUploadAvatarLoading(true);
-
-  //   const idAvatar = uuidv4();
-
-  //   const avatarName = `${idAvatar}-${file?.name}`;
-  //   if (file) {
-  //     const fileRef = ref(analytics, `kasa-talk-avatar/${avatarName}`);
-  //     uploadBytes(fileRef, file).then((data) => {
-  //       getDownloadURL(data.ref).then((url) => {
-  //         console.log('url', url);
-  //         setAvatarUrl(url);
-  //       });
-  //     });
-  //   } else {
-  //     alert('belum ada file');
-  //   }
-
-  //   try {
-  //     const token = getCookie('accessToken');
-  //     const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/users/avatar', {
-  //       method: 'POST',
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ avatarUrl }),
-  //     });
-
-  //     if (res.ok) {
-  //       setTimeout(() => {
-  //         window.location.reload();
-  //       }, 1000);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setUploadAvatarLoading(false);
-  //   }
-  // };
 
   const handleFileSelect = (event: any) => {
     const file = event.target.files[0];
