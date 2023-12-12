@@ -56,7 +56,7 @@ export default function Page() {
       ) : (
         <div className="bg-white max-w-6xl mx-auto p-4 my-6 py-10 border rounded-lg">
           <div className="rounded-full bg-gray-300 h-32 mx-auto place-content-center aspect-square overflow-hidden">
-            <img src={userData?.avatarUrl} width={130} height={200} alt="profile-picture" />
+            <img src={userData?.avatarUrl} width={130} height={200} alt="profile-picture" className="object-cover h-32" />
           </div>
           <form className="space-y-4 md:space-y-6 max-w-4xl mx-auto mt-10">
             <div>
