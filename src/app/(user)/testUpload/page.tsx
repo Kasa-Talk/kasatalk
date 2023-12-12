@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { analytics } from "@/app/firebase/firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
 
 const Page = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -11,8 +12,12 @@ const Page = () => {
     event.preventDefault();
     console.log(file);
 
+    const idAudio = uuidv4();
+
+    const audioName = `${idAudio}-${file?.name}`
+
     if (file) {
-      const fileRef = ref(analytics, `kasa-talk-audio/${file.name}`);
+      const fileRef = ref(analytics, `kasa-talk-audio/${audioName}`);
       uploadBytes(fileRef, file).then((data) => {
         getDownloadURL(data.ref).then((url) => {
           console.log("url", url);
