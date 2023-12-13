@@ -94,6 +94,11 @@ export default function Page() {
             setSuccessMessage(
               "Kata berhasil diupload, silakan tunggu untuk admin mereview kata"
             );
+            setKataIndo("")
+            setKataSasak("")
+            setPenggunaanKataIndo("")
+            setPenggunaanKataSasak("")
+            setFile(null)
             setIsLoad(false);
           } catch (error) {
             console.error("Error during upload:", error);
@@ -102,6 +107,7 @@ export default function Page() {
       });
     } else {
       setErrorMessage("Ukuran atau format file belum sesuai");
+      setIsLoad(false);
       return;
     }
   };
@@ -183,7 +189,7 @@ export default function Page() {
         <button
           type="submit"
           className="btn font-medium h-10 w-full bg-primary text-white">
-          {!isLoad ? "Submit" : <div className="custom-loader mx-auto"></div>}
+          {!isLoad ? "Tambah" : <div className="custom-loader mx-auto"></div>}
         </button>
         {errorInfo}
         {successInfo}
