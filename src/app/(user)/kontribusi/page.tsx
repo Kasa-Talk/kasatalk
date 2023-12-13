@@ -1,13 +1,13 @@
 "use client";
 
 import { getCookie, hasCookie } from "cookies-next";
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import getBaseURL from "@/libs/getBaseUrl";
 import { analytics } from "@/app/firebase/firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
+import { ErrorMessage } from "@/components/message";
 type EventHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
 export default function Page() {
@@ -16,7 +16,18 @@ export default function Page() {
   const [penggunaanKataIndo, setPenggunaanKataIndo] = useState<string>("");
   const [penggunaanKataSasak, setPenggunaanKataSasak] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
-  const [fileURL, setFileURL] = useState<string>("");
+  const [isLoad, setIsLoad] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
+
+  const errorInfo = errorMessage ? <ErrorMessage title={errorMessage} /> : null;
+  const successInfo = successMessage ? (
+    <div
+      className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+      role="alert">
+      <span className="font-medium">Success alert!</span> {successMessage}
+    </div>
+  ) : null;
 
   const onHandlerKataIndo: EventHandler = (event) => {
     setKataIndo(event.target.value);
@@ -41,58 +52,64 @@ export default function Page() {
   };
 
   const onSubmitKata = async (event: any) => {
+    setIsLoad(true);
     event.preventDefault();
 
     const idAudio = uuidv4();
     const audioName = `${idAudio}-${file?.name}`;
 
-    if (file && file.size <= 2000000) {
+    if (file && file.size <= 2000000 && file.type === "audio/mpeg") {
       const fileRef = ref(analytics, `kasa-talk-audio/${audioName}`);
+
       uploadBytes(fileRef, file).then((data) => {
-        getDownloadURL(data.ref).then((url) => {
+        getDownloadURL(data.ref).then(async (url) => {
           console.log("url", url);
-          setFileURL(url);
+          console.log(typeof url);
+
+          const body = {
+            indonesia: kataIndo,
+            sasak: kataSasak,
+            contohPenggunaanIndo: penggunaanKataIndo,
+            contohPenggunaanSasak: penggunaanKataSasak,
+            audioUrl: `${url}`,
+          };
+
+          console.log(body);
+
+          try {
+            const response = await fetch(getBaseURL("/kata"), {
+              method: "POST",
+              body: JSON.stringify(body),
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getCookie("accessToken")}`,
+              },
+            });
+
+            if (!response.ok) {
+              throw new Error(`Upload failed`);
+            }
+            const responseData = await response.json();
+            console.log("Upload successful:", responseData);
+            setSuccessMessage(
+              "Kata berhasil diupload, silakan tunggu untuk admin mereview kata"
+            );
+            setIsLoad(false);
+          } catch (error) {
+            console.error("Error during upload:", error);
+          }
         });
       });
     } else {
-      alert("ukuran file terlalu besar");
+      setErrorMessage("Ukuran atau format file belum sesuai");
+      return;
     }
-
-    const body = {
-      indonesia: kataIndo,
-      sasak: kataSasak,
-      contohPenggunaanIndo: penggunaanKataIndo,
-      contohPenggunaanSasak: penggunaanKataSasak,
-      audioUrl: fileURL,
-    };
-
-    console.log("ini", body, file);
-
-    // try {
-    //   const response = await fetch(getBaseURL("/kata"), {
-    //     method: "POST",
-    //     body: JSON.stringify(body);
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${getCookie("accessToken")}`,
-    //     },
-    //   });
-
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     console.log("Upload successful:", data);
-    //   } else {
-    //     console.error("Upload failed:", response.statusText);
-    //   }
-    // } catch (error) {
-    //   console.error("Error during upload:", error);
-    // }
   };
 
   const cookie = hasCookie("accessToken");
   const router = useRouter();
-  if (!cookie) {
-    router.push("/login");
+  if (!cookie && typeof window !== "undefined") {
+    router.push("/notLogin");
     return null;
   }
 
@@ -157,7 +174,7 @@ export default function Page() {
           <input
             required
             type="file"
-            accept=".mp3"
+            accept=".mp3, .mpeg"
             className="block w-full text-sm file:mr-4 file:rounded-s-md border rounded-md file:border-0 file:bg-primary file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white focus:outline-none file:cursor-pointer"
             onChange={onHandlerFile}
           />
@@ -166,8 +183,10 @@ export default function Page() {
         <button
           type="submit"
           className="btn font-medium h-10 w-full bg-primary text-white">
-          Submit
+          {!isLoad ? "Submit" : <div className="custom-loader mx-auto"></div>}
         </button>
+        {errorInfo}
+        {successInfo}
       </form>
 
       {/* <WordCardListContributor /> */}
