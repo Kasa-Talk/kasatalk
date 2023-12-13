@@ -30,6 +30,8 @@ export default function Page() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfrimPassword] = useState('');
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [btnEditLoad, setBtnEditLoad] = useState(false);
 
   const [file, setFile] = useState<File | null>(null);
@@ -165,11 +167,15 @@ export default function Page() {
             </div>
             <div>
               <label className="block mb-3 text-lg font-medium text-gray-900">Password Baru</label>
-              <input type="password" onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+              <input type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
             </div>
             <div>
               <label className="block mb-3 text-lg font-medium text-gray-900">Konfirmasi Password</label>
-              <input type="password" onChange={(e) => setConfrimPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+              <input type={showPassword ? 'text' : 'password'} onChange={(e) => setConfrimPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+            </div>
+            <div className="flex items-center gap-3">
+              <input type="checkbox" id="showPassword" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+              <label htmlFor="showPassword">Tampilkan Password</label>
             </div>
             <div>{message ? message === 'User updated successfully' ? <SuccessMessage title="Data berhasil diubah" /> : <ErrorMessage title={message} /> : ''}</div>
             <button className="mt-6 btn w-full font-medium text-base px-5 py-2.5" onClick={handleEdit}>

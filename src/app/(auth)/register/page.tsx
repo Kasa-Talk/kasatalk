@@ -15,6 +15,8 @@ const Page = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [message, setMessage] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +75,7 @@ const Page = () => {
       <div className="bg-primary hidden md:flex justify-end">
         <Image src={'/asset/batik-icon-vertikal.svg'} width={100} height={100} alt="batik-image" />
       </div>
-      <div className="my-auto px-4 md:w-full max-w-2xl mx-auto mt-4">
+      <div className="my-auto px-4 md:w-full max-w-2xl mx-auto md:mt-4 mt-10">
         <div className="flex md:flex-row flex-col-reverse md:items-center justify-between">
           <div>
             <h1 className="text-3xl md:text-4xl pb-3 font-bold leading-tight tracking-tight text-gray-900 dark:text-black mt-6">Buat Akun Anda</h1>
@@ -94,11 +96,27 @@ const Page = () => {
           </div>
           <div>
             <label className="block mb-2 text-lg font-medium text-gray-900">Password</label>
-            <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg" placeholder="password" required onChange={(e) => setPassword(e.target.value)} />
+            <input
+              type={showPassword ? 'text' : 'password'}
+              className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg"
+              placeholder="password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <div>
             <label className="block mb-2 text-lg font-medium text-gray-900">Konfirmasi Password</label>
-            <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg" placeholder="confirm password" required onChange={(e) => setConfirmPassword(e.target.value)} />
+            <input
+              type={showPassword ? 'text' : 'password'}
+              className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg"
+              placeholder="confirm password"
+              required
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <input type="checkbox" id="showPassword" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+            <label htmlFor="showPassword">Tampilkan Password</label>
           </div>
 
           <div>{message ? message === 'User created, please check your email to activate your account' ? <SuccessMessage title="Daftar akun berhasil" /> : <ErrorMessage title={message} /> : ''}</div>
