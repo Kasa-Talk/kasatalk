@@ -7,7 +7,6 @@ import getBaseURL from "@/libs/getBaseUrl";
 import { analytics } from "@/app/firebase/firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import WordCardListContributor from "@/components/wordCardListContributor";
 import { useRouter } from "next/navigation";
 type EventHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
@@ -171,7 +170,7 @@ export default function Page() {
         </button>
       </form>
 
-      <WordCardListContributor />
+      {/* <WordCardListContributor /> */}
     </div>
   );
 }
