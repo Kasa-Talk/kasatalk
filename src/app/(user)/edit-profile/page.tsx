@@ -89,8 +89,6 @@ export default function Page() {
         }, 1000);
       }
 
-      console.log(data.errors);
-
       if (data.errors) {
         if (data.errors.includes('Password not match')) {
           setMessage('Password tidak sama');
