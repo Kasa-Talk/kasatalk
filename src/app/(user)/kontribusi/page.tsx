@@ -107,6 +107,7 @@ export default function Page() {
       });
     } else {
       setErrorMessage("Ukuran atau format file belum sesuai");
+      setIsLoad(false);
       return;
     }
   };
