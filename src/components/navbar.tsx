@@ -73,7 +73,7 @@ export default function Navbar() {
         </div>
         <div className="menu">
           <ul
-            className={`flex md:gap-16 gap-9 md:p-0 md:static md:border-none md:mt-0 md:z-0 md:w-auto md:h-auto md:flex-row fixed bg-white flex-col border border-r-0 border-t-0 mt-[2.40rem] max-[500px]:w-full w-[50%] p-6 h-full right-0 lg:transition-none transition-all ease-in-out  ${
+            className={`flex md:gap-16 gap-9 md:p-0 md:static md:border-none md:mt-0 md:z-0 md:w-auto md:h-auto md:flex-row fixed bg-white flex-col border border-r-0 border-t-0 mt-[2.55rem] max-[500px]:w-full w-[50%] p-6 h-full right-0 lg:transition-none ease-in-out  ${
               isOpen ? 'right-0 duration-500' : 'right-[-100%] duration-500'
             }`}
           >
@@ -85,9 +85,9 @@ export default function Navbar() {
               </li>
             ))}
             {!userData && (
-              <button className={`btn py-2 md:hidden block`}>
-                <Link href={'/login'}>Masuk</Link>
-              </button>
+              <Link href="/login" className="btn py-2 text-center md:hidden block" onClick={() => setIsOpen(!isOpen)}>
+                Masuk
+              </Link>
             )}
           </ul>
         </div>
@@ -114,7 +114,7 @@ export default function Navbar() {
                       </li>
                       <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md">
                         <Link href={'/edit-profile'} onClick={() => setOpenModal(!openModal)}>
-                          Edit Profile
+                          Ubah Profile
                         </Link>
                       </li>
                       <li className="cursor-pointer hover:bg-[#F3F4F6] p-2 rounded-md text-primary" onClick={handleLogout}>
@@ -124,10 +124,8 @@ export default function Navbar() {
                   </div>
                 </div>
               ) : (
-                <Link href={'/login'}>
-                  <button className={`btn px-8 py-2 md:block hidden`} onClick={() => setIsOpen(!isOpen)}>
-                    Masuk
-                  </button>
+                <Link href={'/login'} className="btn px-8 py-2 md:flex justify-center hidden ">
+                  Masuk
                 </Link>
               )}
             </div>
