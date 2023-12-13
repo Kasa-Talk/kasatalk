@@ -87,13 +87,13 @@ const ForgotPassword = () => {
               type="button"
               onClick={handlerModal}
               className="border-primary border py-2 px-6 rounded text-primary">
-              Cancel
+              Batal
             </button>
             <button
               type="submit"
               onClick={submitForgotPassword}
               className="px-6 rounded bg-primary text-white">
-              Submit
+              Kirim
             </button>
           </div>
         </div>
