@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ErrorMessage } from '@/components/message';
+import { ErrorMessage, SuccessMessage } from '@/components/message';
 
 const Page = () => {
   const router = useRouter();
@@ -15,7 +15,7 @@ const Page = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [message, setMessage] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,24 +38,31 @@ const Page = () => {
       });
 
       if (res.ok) {
-        router.push('/email-verification');
+        setTimeout(() => {
+          router.push('/email-verification');
+        }, 1000);
       }
 
       const data = await res.json();
 
+      if (data.message === 'User created, please check your email to activate your account') {
+        setMessage(data.message);
+      }
+
       if (data.errors) {
         if (data.errors.includes('Account already registered, please check your email to activate your account')) {
-          setErrorMessage('Akun email sudah terdaftar, mohon periksa email anda untuk aktifiasi akun anda');
+          setMessage('Akun email sudah terdaftar, mohon periksa email anda untuk aktifiasi akun anda');
         } else if (data.errors.includes('Account already activated')) {
-          setErrorMessage('Alamat email sudah digunakan');
+          setMessage('Alamat email sudah digunakan');
         } else if (data.errors.includes('Password does not match')) {
-          setErrorMessage('Password tidak sama');
+          setMessage('Password tidak sama');
         } else if (data.errors.includes('password most be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol')) {
-          setErrorMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 huruf dan 1 simbol');
+          setMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 huruf dan 1 simbol');
         }
       }
     } catch (error) {
       console.log(error);
+      setMessage('Server sedang mengalami masalah. Mohon coba lagi nanti');
     } finally {
       setIsLoading(false);
     }
@@ -94,7 +101,7 @@ const Page = () => {
             <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg" placeholder="confirm password" required onChange={(e) => setConfirmPassword(e.target.value)} />
           </div>
 
-          <div>{errorMessage && <ErrorMessage title={errorMessage} />}</div>
+          <div>{message ? message === 'User created, please check your email to activate your account' ? <SuccessMessage title="Daftar akun berhasil" /> : <ErrorMessage title={message} /> : ''}</div>
 
           <button className="w-full py-2 btn mt-2 flex justify-center" type="submit">
             {isLoading ? <div className="custom-loader mx-auto"></div> : 'Daftar'}
