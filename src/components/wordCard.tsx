@@ -43,7 +43,7 @@ export default function WordCard(props: Props) {
             </div>
           )}
         </div>
-        <audio src={props.audioUrl} controls ref={audioRef} hidden></audio>
+        <audio src={props.audioUrl} controls ref={audioRef} hidden onEnded={() => setIsPlaying(!isPlaying)}></audio>
         <button onClick={handlePlayPause}>{isPlaying ? <RiVolumeUpFill className="text-primary text-xl" /> : <RiVolumeMuteFill className="text-primary text-xl" />}</button>
       </div>
       <div className="flex flex-col gap-2 mt-4">
