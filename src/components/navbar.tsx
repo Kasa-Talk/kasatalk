@@ -73,7 +73,7 @@ export default function Navbar() {
         </div>
         <div className="menu">
           <ul
-            className={`flex md:gap-16 gap-9 md:p-0 md:static md:border-none md:mt-0 md:z-0 md:w-auto md:h-auto md:flex-row fixed bg-white flex-col border border-r-0 border-t-0 mt-[2.55rem] max-[500px]:w-full w-[50%] p-6 h-full right-0 lg:transition-none ease-in-out  ${
+            className={`flex md:gap-16 gap-9 md:p-0 md:static md:border-none md:mt-0 md:z-0 md:w-auto md:h-auto md:flex-row fixed bg-white flex-col border border-r-0 border-t-0 mt-[2.38rem] max-[500px]:w-full w-[50%] p-6 h-full right-0 lg:transition-none ease-in-out  ${
               isOpen ? 'right-0 duration-500' : 'right-[-100%] duration-500'
             }`}
           >

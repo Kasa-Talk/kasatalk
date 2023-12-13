@@ -8,6 +8,7 @@ import { getCookie, hasCookie, deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import Loading from '@/app/loading';
 import Dialog from '@/components/dialog';
+import { RiErrorWarningFill } from 'react-icons/ri';
 
 interface UserData {
   name: string;
@@ -116,7 +117,10 @@ export default function Page() {
             onSubmit={handleDeleteAccount}
             onClose={() => setClose(!close)}
             isLoading={btnLoading}
-          />
+            icon={<RiErrorWarningFill className="text-red-600" />}
+          >
+            <p className='mt-2 mb-3 font-medium'>Kontribusi kata anda yang sudah aktif akan otomatis milik admin dan yang masih pending akan dihapus</p>
+          </Dialog>
         </div>
       )}
     </div>
