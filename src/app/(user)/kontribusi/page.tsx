@@ -151,7 +151,7 @@ export default function Page() {
         </div>
         <div className="space-y-3">
           <label className="text-md">
-            Contoh Penggunaan Kata Dalama Bahasa Indonesia
+            Contoh Penggunaan Kata Dalam Bahasa Indonesia
           </label>
           <input
             required
@@ -164,7 +164,7 @@ export default function Page() {
         </div>
         <div className="space-y-3">
           <label className="text-md">
-            Contoh Penggunaan Kata Dalama Bahasa Sasak
+            Contoh Penggunaan Kata Dalam Bahasa Sasak
           </label>
           <input
             required
@@ -176,7 +176,7 @@ export default function Page() {
           />
         </div>
         <div className="space-y-3">
-          <label className="text-md">Unggah Suara Kata</label>
+          <label className="text-md">Unggah Suara Kata Bahasa Sasak</label>
           <input
             required
             type="file"
