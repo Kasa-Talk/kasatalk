@@ -58,7 +58,7 @@ const Page = () => {
           setMessage('Alamat email sudah digunakan');
         } else if (data.errors.includes('Password does not match')) {
           setMessage('Password tidak sama');
-        } else if (data.errors.includes('password must be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol')) {
+        } else if (data.errors.includes('password most be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol')) {
           setMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 huruf dan 1 simbol');
         }
       }
