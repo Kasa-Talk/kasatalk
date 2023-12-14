@@ -10,7 +10,7 @@ export default function Page() {
         </div>
         <div className="text-center mt-2">
           <h1 className="font-bold text-2xl">Terima Kasih Sudah Mendaftar</h1>
-          <p className="mt-3">Silahkan periksa email anda untuk aktifiasi akun anda</p>
+          <p className="mt-3">Silahkan periksa email anda untuk aktivasi akun anda</p>
         </div>
         <Link href={'/login'}>
           <button className="btn px-10 py-2">Login</button>
