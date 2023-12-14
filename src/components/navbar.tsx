@@ -103,7 +103,7 @@ export default function Navbar() {
                 <div className="relative">
                   <div className={`flex gap-4 items-center px-4 py-2 rounded-md hover:bg-[#F3F4F6] cursor-pointer ${openModal ? 'bg-[#F3F4F6]' : ''}`} onClick={() => setOpenModal(!openModal)}>
                     <img src={userData?.avatarUrl} alt={userData?.name} className="w-8 h-8 object-cover rounded-full" />
-                    <p>{userData?.name}</p>
+                    <p className="truncate">{userData?.name}</p>
                   </div>
                   <div className={`absolute bg-white border p-4 w-40  rounded-md  mt-[1rem] -z-10 right-0 ${openModal ? 'block' : 'hidden'}`}>
                     <ul className="flex flex-col gap-2">
