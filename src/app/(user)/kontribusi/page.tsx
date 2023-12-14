@@ -54,6 +54,7 @@ export default function Page() {
   };
 
   const onSubmitKata = async (event: any) => {
+    console.log(file);
     setErrorMessage("");
     setSuccessMessage("");
     setIsLoad(true);
@@ -62,7 +63,8 @@ export default function Page() {
     const idAudio = uuidv4();
     const audioName = `${idAudio}-${file?.name}`;
 
-    if (file && file.size <= 2000000 && file.type === "audio/mpeg") {
+    const allowedFileTypes = ["audio/x-m4a", "audio/wav", "audio/mpeg"];
+    if (file && file.size <= 2000000 && allowedFileTypes.includes(file.type)) {
       const fileRef = ref(analytics, `kasa-talk-audio/${audioName}`);
 
       uploadBytes(fileRef, file).then((data) => {
@@ -189,12 +191,12 @@ export default function Page() {
             required
             id="inputAudio"
             type="file"
-            accept=".mp3, .mpeg"
+            accept=".m4a, .mp3, .wav"
             className="block w-full text-sm file:mr-4 file:rounded-s-md border rounded-md file:border-0 file:bg-primary file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white focus:outline-none file:cursor-pointer"
             onChange={onHandlerFile}
             ref={fileInputRef}
           />
-          <p className="text-sm text-gray-400">Only .mp3 (Max 2mb)</p>
+          <p className="text-sm text-gray-400">Only .m4a, .mp3, .wav (Max 2mb)</p>
         </div>
         <button
           type="submit"
