@@ -101,20 +101,26 @@ export default function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex flex-col gap-1 items-start w-full">
                 <label className="font-medium">Email</label>
-                <input type="email" className="border border-gray-300 bg-gray-50 w-full p-2 rounded-lg" required onChange={(e) => setEmail(e.target.value)} value={email} />
+                <input type="email" className="border border-gray-300 focus:border-primary outline-primary bg-gray-50 w-full p-2 rounded-lg" required onChange={(e) => setEmail(e.target.value)} value={email} />
               </div>
               <div className="flex flex-col gap-1 items-start w-full">
                 <label className="font-medium">Nama</label>
-                <input type="text" className="border border-gray-300 bg-gray-50  w-full p-2 rounded-lg" required onChange={(e) => setName(e.target.value)} value={name} />
+                <input type="text" className="border border-gray-300 focus:border-primary outline-primary bg-gray-50  w-full p-2 rounded-lg" required onChange={(e) => setName(e.target.value)} value={name} />
               </div>
               <div className="flex flex-col gap-1 items-start w-full">
                 <label className="font-medium">Subjek</label>
-                <input type="email" className="border border-gray-300 bg-gray-50  w-full p-2 rounded-lg" required onChange={(e) => setSubject(e.target.value)} value={subject} />
+                <input type="email" className="border border-gray-300 focus:border-primary outline-primary bg-gray-50  w-full p-2 rounded-lg" required onChange={(e) => setSubject(e.target.value)} value={subject} />
               </div>
             </div>
             <div className="flex flex-col gap-1 items-start w-full">
               <label className="font-medium">Pesan</label>
-              <textarea name="message" className="border border-gray-300 bg-gray-50  w-full p-2 rounded-lg max-row resize-none h-full" rows={4} onChange={(e) => setMessage(e.target.value)} value={message}></textarea>
+              <textarea
+                name="message"
+                className="border border-gray-300 focus:border-primary outline-primary bg-gray-50  w-full p-2 rounded-lg max-row resize-none h-full"
+                rows={4}
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+              ></textarea>
             </div>
           </div>
         </form>
