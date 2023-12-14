@@ -120,7 +120,7 @@ export default function Page() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4 mt-4">
       <h1 className="text-primary text-2xl font-semibold text-center">
         Silakan Tambah Kosa Kata Bahasa Sasak
       </h1>
