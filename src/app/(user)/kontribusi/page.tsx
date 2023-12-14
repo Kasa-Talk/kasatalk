@@ -1,7 +1,7 @@
 "use client";
 
 import { getCookie, hasCookie } from "cookies-next";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import getBaseURL from "@/libs/getBaseUrl";
 import { analytics } from "@/app/firebase/firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -20,12 +20,14 @@ export default function Page() {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
 
+  const fileInputRef = useRef(null);
+
   const errorInfo = errorMessage ? <ErrorMessage title={errorMessage} /> : null;
   const successInfo = successMessage ? (
     <div
-      className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+      className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100"
       role="alert">
-      <span className="font-medium">Success alert!</span> {successMessage}
+      {successMessage}
     </div>
   ) : null;
 
@@ -52,6 +54,8 @@ export default function Page() {
   };
 
   const onSubmitKata = async (event: any) => {
+    setErrorMessage("");
+    setSuccessMessage("");
     setIsLoad(true);
     event.preventDefault();
 
@@ -94,12 +98,13 @@ export default function Page() {
             setSuccessMessage(
               "Kata berhasil diupload, silakan tunggu untuk admin mereview kata"
             );
-            setKataIndo("")
-            setKataSasak("")
-            setPenggunaanKataIndo("")
-            setPenggunaanKataSasak("")
-            setFile(null)
+            setKataIndo("");
+            setKataSasak("");
+            setPenggunaanKataIndo("");
+            setPenggunaanKataSasak("");
+            setFile(null);
             setIsLoad(false);
+            fileInputRef.current = null;
           } catch (error) {
             console.error("Error during upload:", error);
           }
@@ -179,10 +184,12 @@ export default function Page() {
           <label className="text-md">Unggah Suara Kata Bahasa Sasak</label>
           <input
             required
+            id="inputAudio"
             type="file"
             accept=".mp3, .mpeg"
             className="block w-full text-sm file:mr-4 file:rounded-s-md border rounded-md file:border-0 file:bg-primary file:py-2.5 file:px-4 file:text-sm file:font-semibold file:text-white focus:outline-none file:cursor-pointer"
             onChange={onHandlerFile}
+            ref={fileInputRef}
           />
           <p className="text-sm text-gray-400">Only .mp3 (Max 2mb)</p>
         </div>
