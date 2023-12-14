@@ -118,7 +118,7 @@ const Page: React.FC = () => {
                 onChange={handlerEmail}
                 type="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 focus:outline-red-600 rounded-lg"
-                placeholder="jhonedoe@gmail.com"
+                placeholder="johndoe@gmail.com"
               />
             </div>
             <div>
