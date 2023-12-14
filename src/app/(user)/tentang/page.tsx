@@ -73,13 +73,13 @@ export default function Page() {
                     </div>
                     <p className="text-lg font-medium mt-4">{team.univesity}</p>
                     <div className="flex gap-3 mt-4 justify-center sm:justify-start">
-                      <Link href={team.socialMedia.linkedin} className="text-2xl text-zinc-600 hover:text-blue-900">
+                      <Link href={team.socialMedia.linkedin} target="_blank" className="text-2xl text-zinc-600 hover:text-blue-900">
                         <RiLinkedinBoxFill />
                       </Link>
-                      <Link href={team.socialMedia.instagram} className="text-2xl text-zinc-600 hover:text-red-600">
+                      <Link href={team.socialMedia.instagram} target="_blank" className="text-2xl text-zinc-600 hover:text-red-600">
                         <RiInstagramLine />
                       </Link>
-                      <Link href={team.socialMedia.github} className="text-2xl text-zinc-600 hover:text-black">
+                      <Link href={team.socialMedia.github} target="_blank" className="text-2xl text-zinc-600 hover:text-black">
                         <RiGithubFill />
                       </Link>
                     </div>
