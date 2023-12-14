@@ -20,7 +20,7 @@ export default function Page() {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  const fileInputRef = useRef();
+  const fileInputRef = useRef(null);
 
   const errorInfo = errorMessage ? <ErrorMessage title={errorMessage} /> : null;
   const successInfo = successMessage ? (
@@ -104,7 +104,7 @@ export default function Page() {
             setPenggunaanKataSasak("");
             setFile(null);
             setIsLoad(false);
-            fileInputRef.current.value = "";
+            fileInputRef.current = null;
           } catch (error) {
             console.error("Error during upload:", error);
           }
