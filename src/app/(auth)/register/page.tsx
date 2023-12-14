@@ -53,12 +53,12 @@ const Page = () => {
 
       if (data.errors) {
         if (data.errors.includes('Account already registered, please check your email to activate your account')) {
-          setMessage('Akun email sudah terdaftar, mohon periksa email anda untuk aktifiasi akun anda');
+          setMessage('Akun email sudah terdaftar, mohon periksa email anda untuk aktivasi akun anda');
         } else if (data.errors.includes('Account already activated')) {
           setMessage('Alamat email sudah digunakan');
         } else if (data.errors.includes('Password does not match')) {
           setMessage('Password tidak sama');
-        } else if (data.errors.includes('password most be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol')) {
+        } else if (data.errors.includes('password must be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol')) {
           setMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 huruf dan 1 simbol');
         }
       }
@@ -92,7 +92,7 @@ const Page = () => {
           </div>
           <div>
             <label className="block mb-2 text-lg font-medium text-gray-900">Email</label>
-            <input type="email" className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg" placeholder="jhonedoe@gmail.com" required onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg" placeholder="johndoe@gmail.com" required onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <label className="block mb-2 text-lg font-medium text-gray-900">Password</label>
@@ -109,7 +109,7 @@ const Page = () => {
             <input
               type={showPassword ? 'text' : 'password'}
               className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2 focus:outline-primary rounded-lg"
-              placeholder="confirm password"
+              placeholder="konfirmasi password"
               required
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
