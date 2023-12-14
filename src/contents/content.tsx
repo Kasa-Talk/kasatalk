@@ -30,7 +30,7 @@ export const benefitUse = [
   },
   {
     name: 'Kemudahan Akses',
-    description: 'Dengan adanya kasa talk, kita dengan mudah mengakses kamus bahasa sasak dengan melalui smartphone/laptop sepanjang waktu.',
+    description: 'Dengan adanya Kasa Talk, kita dapat dengan mudah mengakses kamus bahasa sasak melalui smartphone/laptop kapan pun dan dimana pun.',
   },
   {
     name: 'Mempermudah pencarian informasi bahasa daerah',
