@@ -68,7 +68,7 @@ const ForgotPassword = () => {
       <div
         className={`w-full h-full flex justify-center items-center bg-black bg-opacity-80 left-0 top-0 ${
           isOpen ? "visible opacity-100" : "invisible opacity-0"
-        } transition-all absolute duration-400`}>
+        } transition-all absolute duration-400 px-8`}>
         <div className="max-w-xl bg white bg-white w-full rounded-md p-4 space-y-4">
           <ToastContainer delay={5000} />
           <h1 className="text-center text-lg font-medium">
