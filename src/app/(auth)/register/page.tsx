@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ErrorMessage, SuccessMessage } from '@/components/message';
+import validator from 'validator';
 
 const Page = () => {
   const router = useRouter();
@@ -25,6 +26,27 @@ const Page = () => {
     e.preventDefault();
 
     setIsLoading(true);
+
+    if (
+      !validator.isStrongPassword(password, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+    ) {
+      setMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 simbol');
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setMessage('Password tidak sama');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/register', {
         method: 'POST',
