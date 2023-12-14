@@ -27,6 +27,12 @@ const Page = () => {
 
     setIsLoading(true);
 
+    if (password !== confirmPassword) {
+      setMessage('Password tidak sama');
+      setIsLoading(false);
+      return;
+    }
+
     if (
       !validator.isStrongPassword(password, {
         minLength: 8,
@@ -37,12 +43,6 @@ const Page = () => {
       })
     ) {
       setMessage('Password harus memilki setidaknya 8 karakter, 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 simbol');
-      setIsLoading(false);
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setMessage('Password tidak sama');
       setIsLoading(false);
       return;
     }
