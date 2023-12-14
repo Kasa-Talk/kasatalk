@@ -201,7 +201,7 @@ export default function Page() {
             }}>
             <p className="text-sm md:text-base">
               Bergabung dan jadilah kontributor untuk menambahkan kata-kata yang
-              berlum tersedia dan dapatkan hadiah istimewa.{" "}
+              belum tersedia dan dapatkan hadiah istimewa.{" "}
               <Link href="/login" className="text-primary underline">
                 Bergabung
               </Link>
