@@ -19,7 +19,7 @@ export default function Page() {
   useEffect(() => {
     const fetchTopContributor = async () => {
       try {
-        const response = await fetch(getBaseURL("/kata/top-contributor?limit=5"));
+        const response = await fetch(getBaseURL("/kata/top-contributor"));
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
