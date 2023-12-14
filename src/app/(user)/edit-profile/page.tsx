@@ -51,6 +51,9 @@ export default function Page() {
   const handleEdit = async (e: any) => {
     e.preventDefault();
 
+    
+    setBtnEditLoad(true);
+    
     const idAvatar = uuidv4();
     const avatarName = `${idAvatar}-${file?.name}`;
     let avatarDownloadUrl = avatarUrl;
@@ -70,7 +73,6 @@ export default function Page() {
     };
 
     try {
-      setBtnEditLoad(true);
       const token = getCookie('accessToken');
 
       const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/users', {
@@ -159,19 +161,23 @@ export default function Page() {
           <form className="space-y-4 md:space-y-6 max-w-4xl mx-auto my-10">
             <div>
               <label className="block mb-3 text-lg font-medium text-gray-900">Nama</label>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg focus:border-primary outline-primary" />
             </div>
             <div>
               <label className="block mb-3 text-lg font-medium text-gray-900">Email</label>
-              <input type="text" value={userData?.email} disabled className="bg-gray-200 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+              <input type="text" value={userData?.email} disabled className="bg-gray-200 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg focus:border-primary outline-primary" />
             </div>
             <div>
               <label className="block mb-3 text-lg font-medium text-gray-900">Password Baru</label>
-              <input type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+              <input type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg focus:border-primary outline-primary" />
             </div>
             <div>
               <label className="block mb-3 text-lg font-medium text-gray-900">Konfirmasi Password</label>
-              <input type={showPassword ? 'text' : 'password'} onChange={(e) => setConfrimPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg" />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                onChange={(e) => setConfrimPassword(e.target.value)}
+                className="bg-gray-50 border border-gray-300 text-gray-900 w-full p-2.5 px-4 rounded-lg focus:border-primary outline-primary"
+              />
             </div>
             <div className="flex items-center gap-3">
               <input type="checkbox" id="showPassword" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
