@@ -87,7 +87,7 @@ export const teams = [
     univesity: 'Universitas Mataram',
     imageUrl: '/images/muh_firdaus.jpeg',
     socialMedia: {
-      linkedin: 'https://www.linkedin.com/in/muh-firdaus-b3333a230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+      linkedin: 'https://www.linkedin.com/in/muhfirdaus08/',
       github: 'https://github.com/muhfirdaus08',
       instagram: 'https://www.instagram.com/muhfirdaus08',
     },
@@ -98,7 +98,7 @@ export const teams = [
     univesity: 'Universitas Bumigora',
     imageUrl: '/images/galuh_satria.jpeg',
     socialMedia: {
-      linkedin: 'https://linkedin/in/galuh-satria-1002484210',
+      linkedin: 'https://www.linkedin.com/in/galuhsatria/',
       github: 'https://github.com/galuhsatria',
       instagram: 'https://www.instagram.com/galuhsatria._/',
     },
