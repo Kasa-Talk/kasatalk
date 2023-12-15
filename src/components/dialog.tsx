@@ -32,7 +32,7 @@ export default function Dialog(props: Props) {
           <button onClick={props.onCancel} type="button" className="border border-primary text-primary font-medium rounded-full px-4 py-2 w-28">
             {props.cancelText}
           </button>
-          <button onClick={props.onSubmit} type="submit" className="bg-red-600 rounded-full px-4 py-2 w-28 text-white">
+          <button onClick={props.onSubmit} className="bg-red-600 rounded-full px-4 py-2 w-28 text-white">
             {props.isLoading ? <div className="custom-loader mx-auto"></div> : props.submitText}
           </button>
         </div>
