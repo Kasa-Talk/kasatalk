@@ -53,8 +53,8 @@ const Page: React.FC = () => {
         await response.json();
 
       if (response.ok) {
-        setCookie("accessToken", accessToken);
-        setCookie("refreshToken", refreshToken);
+        setCookie("accessToken", accessToken, {maxAge: 3600});
+        setCookie("refreshToken", refreshToken, {maxAge: 3600});
         router.push("/");
       } else {
         setIsLoad(false);
