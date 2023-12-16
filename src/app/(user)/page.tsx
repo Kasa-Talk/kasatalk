@@ -26,7 +26,6 @@ export default function Page() {
         }
 
         const { data } = await response.json();
-        console.log(data);
         setTopContributor(data);
       } catch (error) {
         console.error("Error fetching top contributor:", error);
