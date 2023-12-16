@@ -7,16 +7,9 @@ A Sasak language dictionary website.
 # Table of Content
 
 [What I'm using here?](https://github.com/Kasa-Talk/kasatalk#what-im-using-here)
-
-[What's included here?](https://github.com/Kasa-Talk/kasatalk#-whats-included-here)
-
 [How to use it?](https://github.com/Kasa-Talk/kasatalk#how-to-use-it)
-
 [How to run it locally?](https://github.com/Kasa-Talk/kasatalk#how-to-run-it-locally)
 
-[References](https://github.com/Kasa-Talk/kasatalk#references)
-
-[Additional Notes](https://github.com/Kasa-Talk/kasatalk#additional-notes)
 
 ---
 
