@@ -3,14 +3,6 @@
 ![Kasa Talk](https://raw.githubusercontent.com/Kasa-Talk/.github/main/profile/Kasa%20Landing%20Pages.png)
 
 A Sasak language dictionary website.
-
-# Table of Content
-
-[What I'm using here?](https://github.com/Kasa-Talk/kasatalk#what-im-using-here)
-[How to use it?](https://github.com/Kasa-Talk/kasatalk#how-to-use-it)
-[How to run it locally?](https://github.com/Kasa-Talk/kasatalk#how-to-run-it-locally)
-
-
 ---
 
 ## What I'm use here?
