@@ -11,10 +11,6 @@ A Sasak language dictionary website.
 - [Tailwind CSS](https://tailwindcss.com/) sebagai UI Library.
 - [React Markdown Preview](https://github.com/uiwjs/react-markdown-preview) to make the markdown preview result.
 
-##  What's include here?
- - Search for translations of words from Sasak to Indonesian or Indonesian to Sasak
-
-
 ## How to use it?
 
 - Open [kasatalk.vercel.app](https://kasatalk.vercel.app/)
