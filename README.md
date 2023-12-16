@@ -7,9 +7,8 @@ A Sasak language dictionary website.
 
 ## What I'm use here?
 
-- [Next Js](https://nextjs.org/) sebagai Framework.
-- [Tailwind CSS](https://tailwindcss.com/) sebagai UI Library.
-- [React Markdown Preview](https://github.com/uiwjs/react-markdown-preview) to make the markdown preview result.
+- [Next Js](https://nextjs.org/) as Framework.
+- [Tailwind CSS](https://tailwindcss.com/) as UI Library.
 
 ## How to use it?
 
