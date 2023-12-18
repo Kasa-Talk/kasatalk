@@ -61,7 +61,13 @@ export default function Page() {
             </label>
           </div>
           <div className="flex max-w-4xl mx-auto gap-4 mt-6">
-            <input type="text" value={searchValue}  onChange={(e) => setSearchValue(e.target.value)} className="border rounded-full py-[0.65rem] px-4 w-full focus:border-primary outline-none" placeholder="Cari kata ex: apa, dimana" />
+            <input
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              className="border rounded-full py-[0.65rem] px-4 w-full focus:border-primary outline-none"
+              placeholder={`Cari kata: ${isIndonesia ? 'apa, dimana' : 'lalo, solah'}`}
+            />
             <button className="btn px-3 py-2" onClick={handleSearch}>
               {isLoading ? (
                 <svg aria-hidden="true" className="w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
