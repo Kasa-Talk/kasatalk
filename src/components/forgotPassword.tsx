@@ -7,6 +7,7 @@ const ForgotPassword = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [info, setInfo] = useState<string>("");
+  const [isLoad, setIsLoad] = useState<boolean>(false);
 
   const infoError = info.includes(
     "Forgot Password success, please check your email"
@@ -32,10 +33,12 @@ const ForgotPassword = () => {
     setIsOpen(!isOpen);
     setEmail("");
     setInfo("");
+    setIsLoad(false)
   };
 
   const submitForgotPassword = async (event: any) => {
     event.preventDefault();
+    setIsLoad(true);
     try {
       const response = await fetch(getBaseURL("/users/forgot-password"), {
         method: "POST",
@@ -55,6 +58,8 @@ const ForgotPassword = () => {
       }
     } catch (error) {
       toast.error((error as Error).message);
+    } finally {
+      setIsLoad(false);
     }
   };
 
@@ -86,14 +91,14 @@ const ForgotPassword = () => {
             <button
               type="button"
               onClick={handlerModal}
-              className="border-primary border py-2 px-6 rounded text-primary">
+              className="border-primary w-24 border py-2 px-6 rounded text-primary">
               Batal
             </button>
             <button
               type="submit"
               onClick={submitForgotPassword}
-              className="px-6 rounded bg-primary text-white">
-              Kirim
+              className="px-6 rounded bg-primary text-white w-24">
+              {isLoad ? <div className="custom-loader w-4 h-4 mx-auto"></div> : "Kirim"}
             </button>
           </div>
         </div>
