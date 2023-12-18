@@ -69,9 +69,6 @@ export default function Page() {
 
       uploadBytes(fileRef, file).then((data) => {
         getDownloadURL(data.ref).then(async (url) => {
-          console.log("url", url);
-          console.log(typeof url);
-
           const body = {
             indonesia: kataIndo,
             sasak: kataSasak,
@@ -96,7 +93,6 @@ export default function Page() {
               throw new Error(`Upload failed`);
             }
             const responseData = await response.json();
-            console.log("Upload successful:", responseData);
             setSuccessMessage(
               "Kata berhasil diupload, silakan tunggu untuk admin mereview kata"
             );
@@ -196,7 +192,9 @@ export default function Page() {
             onChange={onHandlerFile}
             ref={fileInputRef}
           />
-          <p className="text-sm text-gray-400">Only .m4a, .mp3, .wav (Max 2mb)</p>
+          <p className="text-sm text-gray-400">
+            Only .m4a, .mp3, .wav (Max 2mb)
+          </p>
         </div>
         <button
           type="submit"
